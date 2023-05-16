@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cart-save</title>
+    <script src="https://kit.fontawesome.com/aaaede2f8f.js" crossorigin="anonymous"></script>
+    <style>
+        body{
+          background: #f6f7f9;
+        }
+        #heading{
+            width: 100%;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    #heading h1{
+            font-size: 30px;
+            text-align: center;
+           
+        }
+       
+     .right{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 80px;
+    margin-left: 50px;
+    position: relative;
+    top: 50px;
+   margin-right: 50px;
+   font-family: Arial, Helvetica, sans-serif;
+   }
+   .right .item-grid{
+    float: right;
+    width: 250px;
+    height: 350px;
+    background-color: white;
+    display: grid;
+    /* box-shadow: 20px 20px 30px 20px rgba(0.75,0.75,0.75,0.09); */
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    align-items: flex-end;
+    border-radius:5px ;
+   }
+   .right .item-grid .grey-body{
+    background-color: #e9e9e9;
+    width: 80%;
+   
+    padding:20px;
+    height: 240px;
+    margin: 5px;
+    border-radius: 5px;
+    align-items: flex-start;
+    text-align: start;
+    
+   }
+   .right .item-grid #Amount{
+   margin-left: 20px;
+   margin-top: 20px;
+    
+   }
+   
+   .Btn{
+    width: 70px;
+    height: 35px;
+    background-color: black;
+    color: white;
+    float: right;
+    position: relative;
+     margin: 5px;
+    margin-top: -40px;
+    border-radius: 10px;
+    cursor: pointer;
+   }
+/* ////////////////////////////////////////// */
+   .Shopping{
+    width: 100%;
+    height: 100vh;
+    margin-top: 100px;
+   }
+
+   .cart-header {
+    font-weight: bold;
+    font-size: 1.25em;
+    color: #333;
+}
+
+.cart-column {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid black;
+    margin-right: 1.5em;
+    padding-bottom: 10px;
+    margin-top: 10px;
+}
+.shop-item-image {
+    height: 185px;
+    width: 150px;
+    margin: 0;
+    padding: 0;
+}
+.shop-item-title{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+.shopping-cart{
+    margin-left: 200px;
+    font-size:22px ;
+    margin-top: 25px;
+}
+
+.cart-row {
+    display: flex;
+    width: 700px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin-left: 400px;
+    margin-top: 80px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.cart-item {
+    width: 45%;
+}
+
+.cart-price {
+    width: 20%;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.cart-quantity {
+    width: 35%;
+}
+
+.cart-item-title {
+    color: #333;
+    margin-left: .5em;
+    font-size: 1.2em;
+}
+
+.cart-item-image {
+    width: 75px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.btn-danger {
+    color: black;
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    padding: 10px;
+    width: 80px;
+    border: 3px solid #6699cc;
+   
+}
+
+.cart-quantity-input {
+    height: 34px;
+    width: 50px;
+    border-radius: 5px;
+    border: 1px solid orangered;
+    background-color: #eee;
+    color: #333;
+    padding: 0;
+    text-align: center;
+    font-size: 1.2em;
+    margin-right: 25px;
+}
+
+.cart-row:last-child {
+    border-bottom: 1px solid black;
+}
+
+.cart-row:last-child .cart-column {
+    border: none;
+}
+
+.cart-total {
+    text-align: end;
+    margin-top: 10px;
+    margin-right: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.cart-total-title {
+    font-weight: bold;
+    font-size: 1.5em;
+    color: black;
+    margin-right: 20px;
+}
+
+.cart-total-price {
+    color: #333;
+    font-size: 1.1em;
+    margin-right: 700px; 
+}
+.btn-purchase{
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin-left: 900px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #6699cc ;
+    color: white;
+    border: none;
+    font-weight: 450;
+}
+/* //////////////////////////// */
+
+.popup{
+    width: 400px;
+    background: #fff;
+    border-radius: 6px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(0.1);
+    text-align: center;
+    padding: 0 30px 30px;
+    color: black;
+    visibility: hidden;
+   transition: transform 0.4s,top 0.4s;
+}
+.open-popup{
+    visibility: visible;
+     top: 50%;
+     transform: translate(-50%,-50%) scale(1);
+}
+.popup img{
+ width: 100px;
+ margin-top: -50px;
+ border-radius: 50%;
+ box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+ border: 3px solid #3fa847;
+}
+.popup h2{
+    font-size: 38px;
+    font-weight: 500;
+    margin: 30px 0 10px;
+
+}
+.popup button{
+   width: 100%;
+    margin-top: 30px;
+    padding: 10px 0;
+    background: #3fa847;
+    color: white;
+    border: none;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+}
+/* //////////////////////////////////////////
+///////////////////////////////////////// */
+
+@media(max-width:360px){
+
+    .body{
+     height: 100vh;
+    }
+
+    .search{
+        justify-content: center;
+        text-align: center;
+        margin: 20px;
+        margin-left: -30px;
+        
+        
+       }
+       .search input{
+        width: 180px;
+        border: none;
+        border-radius: 1px solid rgb(162, 154, 154);
+        box-shadow: 20px 20px 30px 20px rgba(0.75,0.75,0.75,0.09);
+        font-size: 15px;
+        padding: 5px;
+       }
+       .Two-sections{
+       
+        flex-direction: column;
+
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+        
+       
+       }
+       .Two-sections .left{
+        display: none;
+       
+       }
+       .list-item{
+        display: grid;
+        flex-direction: column;
+       }
+
+       .shop-item-image {
+        height: 85px;
+        width: 100px;
+    }
+       .shopping-cart{
+        margin-left: 20px;
+        font-size:15px ;
+        margin-top: 25px;
+    }
+    .cart-row {
+        display: flex;
+        width: 100px;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+        margin-left: 40px;
+        margin-top: 30px;
+        margin-right: 20px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10px;
+    }
+    .cart-price{
+        margin-right: 20px;
+        margin-left: 40px;
+    }
+    .cart-quantity{
+        margin-right: 1px;
+        margin-left: 1px;
+      
+    }
+
+    .cart-total {
+        text-align: end;
+        margin-top: 10px;
+        margin-right: 10px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .btn-danger{
+        width: 50px;
+        height: 30px;
+        font-size: 12px;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+       margin-left: 70px;
+       margin-top: -50px;
+       border: 1px solid #6699cc;
+    }
+    
+    .cart-total-title {
+        font-weight: bold;
+        font-size: 0.9em;
+        color: black;
+        margin-right: 80px;
+    }
+    
+    .cart-total-price {
+        color: #333;
+        font-size: 0.8em;
+        margin-right: 100px; 
+    }
+}
+
+
+
+
+@media(max-width:700px){
+
+    .body{
+     height: 100vh;
+     width: 100%;
+    }
+    .Teerex-section{
+      width:76.5%;
+      height: 100%;
+    }
+
+    .search{
+        justify-content: center;
+        text-align: center;
+        margin: 20px;
+        margin-left: -50px;
+        
+        
+       }
+       .search input{
+        width: 300px;
+        border: none;
+        border-radius: 1px solid rgb(162, 154, 154);
+        box-shadow: 20px 20px 30px 20px rgba(0.75,0.75,0.75,0.09);
+        font-size: 15px;
+        padding: 5px;
+       }
+       .Two-sections{
+       
+        flex-direction: column;
+
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+        
+       
+       }
+       .Two-sections .left{
+        display: none;
+       
+       }
+       .list-item{
+        display: grid;
+        flex-direction: column;
+       }
+
+       .shop-item-image {
+        height: 85px;
+        width: 100px;
+    }
+       .shopping-cart{
+        margin-left: 20px;
+        font-size:15px ;
+        margin-top: 25px;
+    }
+    .cart-row {
+        display: flex;
+        width: 100px;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+        margin-left: 100px;
+        margin-top: 30px;
+        margin-right: 40px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 17px;
+    }
+    .cart-price{
+        margin-right: 20px;
+        margin-left: 60px;
+    }
+    .cart-quantity{
+        margin-right: 10px;
+        margin-left: 50px;
+      
+    }
+
+    .cart-total {
+        /* text-align: end; */
+        margin-top: 10px;
+        margin-right: 10px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .btn-danger{
+        width: 100px;
+        height: 40px;
+        font-size: 12px;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+       margin-left: 100px;
+       margin-top: -100px;
+    }
+    
+    .cart-total-title {
+        font-weight: bold;
+        font-size: 0.9em;
+        color: black;
+        margin-right: 300px;
+        justify-content: center;
+    }
+    
+    .cart-total-price {
+        color: #333;
+        font-size: 0.8em;
+       margin-left: 300px;
+    }
+}
+
+@media(max-width:450px){
+    .Teerex-section{
+        width:90%;
+        height: 100%;
+      }
+  
+      .search{
+          justify-content: center;
+          text-align: center;
+          margin: 20px;
+          margin-left: -50px;
+          
+          
+         }
+         .search input{
+          width: 300px;
+          border: none;
+          border-radius: 1px solid rgb(162, 154, 154);
+          box-shadow: 20px 20px 30px 20px rgba(0.75,0.75,0.75,0.09);
+          font-size: 15px;
+          padding: 5px;
+         }
+
+}
+        
+    </style>
+
+</head>
+<body>
+      <section id="cart" class="section-p1">
+        <div id="heading">
+            <h1>Your Choices are Getting added at below</h1>
+        </div>
+
+        <div class="right">
+            <div class="item-grid">
+                <div class="grid">
+                <div class="grey-body">
+                   <img class="shop-item-image" src="Shirt1.jpg"> 
+                 <label class="shop-item-title">Dennis Lingo Men's Checkered Slim Fit Cotton Casual Shirt</label>
+                </div>
+                <h4 class="shop-item-price" id="Amount">Rs300</h4>
+                <button class="Btn shop-item-button" type="submit" >Add to cart</button>
+            </div> 
+        </div>
+
+            <div class="item-grid">
+                <div class="grid">
+                    <div class="grey-body">
+                        <img class="shop-item-image" src="Shirt2.jpg"> 
+                     <label class="shop-item-title">Dennis Lingo Men's Shirt</label>
+                    </div>
+                    <h4 class="shop-item-price" id="Amount">Rs300</h4>
+                    <button class="Btn" type="submit">Add to cart</button>
+                </div>   
+            </div>
+            
+            <div class="item-grid">
+                <div class="grid">
+                    <div class="grey-body">
+                        <img class="shop-item-image" src="Shirt3.jpg"> 
+                     <label class="shop-item-title">Inkast Denim Co.Mens Slim Fit Casual Shirt</label>
+                    </div>
+                    <h4  class="shop-item-price" id="Amount">Rs500</h4>
+                    <button class="Btn" type="submit">Add to cart</button>
+                </div> 
+            </div>
+
+            <div class="item-grid">
+                <div class="grid">
+                    <div class="grey-body">
+                        <img class="shop-item-image" src="Shirt4.jpg"> 
+                     <label class="shop-item-title">Allen Solly Men's Plain Slim Fit casual Shirt</label>
+                    </div>
+                    <h4 class="shop-item-price" id="Amount">Rs250</h4>
+                    <button class="Btn" type="submit">Add to cart</button>
+                </div> 
+            </div>
+
+            <div class="item-grid">
+                <div class="grid">
+                    <div class="grey-body">
+                        <img class="shop-item-image" src="Shirt5.jpg"> 
+                     <label class="shop-item-title">Dennis Lingo Men's casual Shirt</label>
+                    </div>
+                    <h4 class="shop-item-price" id="Amount">Rs250</h4>
+                    <button class="Btn" type="submit">Add to cart</button>
+                </div>   
+            </div>
+
+            <div class="item-grid">
+                <div class="grid">
+                    <div class="grey-body">
+                        <img class="shop-item-image" src="Shirt6.jpg"> 
+                     <label class="shop-item-title">IndoPrime Lingo Men's  Slim Fit casual Shirt</label>
+                    </div>
+                    <h4 class="shop-item-price" id="Amount">Rs500</h4>
+                    <button class="Btn" type="submit">Add to cart</button>
+                </div> 
+            </div>
+
+             <div class="item-grid">
+                <div class="grid">
+                    <div class="grey-body">
+                        <img class="shop-item-image" src="Shirt7.jpg"> 
+                     <label class="shop-item-title">Dennis Lingo Men's Striped Slim Fit Cotton casual Shirt</label>
+                    </div>
+                    <h4 class="shop-item-price" id="Amount">Rs350</h4>
+                    <button class="Btn" type="submit">Add to cart</button>
+                </div>  
+            </div>
+
+             <div class="item-grid">
+                <div class="grid">
+                    <div class="grey-body">
+                        <img class="shop-item-image" src="Shirt8.jpg"> 
+                     <label class="shop-item-title">Mens Regular casual Shirt</label>
+                    </div>
+                    <h4 class="shop-item-price" id="Amount">Rs500</h4>
+                    <button class="Btn" type="submit">Add to cart</button>
+                </div>
+            </div>
+
+           
+            <div class="item-grid">
+                <div class="grid">
+                    <div class="grey-body">
+                        <img class="shop-item-image" src="Tshirt1.jpg"> 
+                     <label class="shop-item-title">Van heusen Mens solid Regular Slim polo</label>
+                    </div>
+                    <h4 class="shop-item-price" id="Amount">Rs500</h4>
+                    <button class="Btn" type="submit">Add to cart</button>
+                </div>
+            </div>
+
+            <div class="item-grid">
+                <div class="grid">
+                    <div class="grey-body">
+                        <img class="shop-item-image" src="Tshirt2.jpg"> 
+                     <label class="shop-item-title">US POLO. ASSN Mens Regular Slim polo</label>
+                    </div>
+                    <h4 class="shop-item-price" id="Amount">Rs500</h4>
+                    <button class="Btn" type="submit">Add to cart</button>
+                </div>
+            </div>
+
+            <div class="item-grid">
+                <div class="grid">
+                    <div class="grey-body">
+                        <img class="shop-item-image" src="Tshirt3.jpg"> 
+                     <label class="shop-item-title">Van Huesen Athleisure Mens Regular Slim polo</label>
+                    </div>
+                    <h4 class="shop-item-price" id="Amount">Rs500</h4>
+                    <button class="Btn" type="submit">Add to cart</button>
+                </div>
+            </div>
+
+            <div class="item-grid">
+                <div class="grid">
+                    <div class="grey-body">
+                        <img class="shop-item-image" src="Tshirt4.jpg"> 
+                     <label class="shop-item-title">Van Huesen Athleisure Mens Regular Slim polo</label>
+                    </div>
+                    <h4 class="shop-item-price" id="Amount">Rs500</h4>
+                    <button class="Btn" type="submit">Add to cart</button>
+                </div>
+            </div>
+
+            <div class="item-grid">
+                <div class="grid">
+                    <div class="grey-body">
+                        <img class="shop-item-image" src="Tshirt5.jpg"> 
+                     <label class="shop-item-title">Lyned Mens cotton half sleeve Slim Tshirt</label>
+                    </div>
+                    <h4 class="shop-item-price" id="Amount">Rs500</h4>
+                    <button class="Btn" type="submit">Add to cart</button>
+                </div>
+            </div>
+
+            <div class="item-grid">
+                <div class="grid">
+                    <div class="grey-body">
+                        <img class="shop-item-image" src="Tshirt6.jpg"> 
+                     <label class="shop-item-title">Bullmer Mens half sleeve Regular Collared Slim Tshirt</label>
+                    </div>
+                    <h4 class="shop-item-price" id="Amount">Rs500</h4>
+                    <button class="Btn" type="submit">Add to cart</button>
+                </div>
+            </div>
+
+            <div class="item-grid">
+                <div class="grid">
+                    <div class="grey-body">
+                        <img class="shop-item-image" src="Tshirt7.jpg"> 
+                     <label class="shop-item-title">Mens Regular Collared Slim Tshirt</label>
+                    </div>
+                    <h4 class="shop-item-price" id="Amount">Rs500</h4>
+                    <button class="Btn" type="submit">Add to cart</button>
+                </div>
+            </div>
+
+            <div class="item-grid">
+                <div class="grid">
+                    <div class="grey-body">
+                        <img class="shop-item-image" src="Tshirt8.jpg"> 
+                     <label class="shop-item-title">Alen jones Mens clothing slim fit Tshirt</label>
+                    </div>
+                    <h4 class="shop-item-price" id="Amount">Rs500</h4>
+                    <button class="Btn" type="submit">Add to cart</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+ </div>
+
+<!-- /////////////////////////////////////////////////////////// -->
+
+ <section class="Shopping">
+    <div class="top-section">
+       
+        <section class="container content-section">
+            
+            <div class="cart-row">
+                <span class="cart-item cart-header cart-column">ITEM</span>
+                <span class="cart-price cart-header cart-column">PRICE</span>
+                <span class="cart-quantity cart-header cart-column">QUANTITY</span>
+            </div>
+
+            <div class="cart-items">
+
+            </div>
+
+            <div class="cart-total">
+                <strong class="cart-total-title">Total Amount</strong>
+                <span class="cart-total-price">Rs.</span>
+            </div>
+            <button class="btn btn-primary btn-purchase" type="button" >Purchase</button>
+        </section>
+
+        <div class="popup" id="popup">
+            <img src="tick.jpg">
+            <h2>Thank you</h2>
+            <p>Your details has been sucessfully Submitted .Thanks!</p>
+            your course Offering id is:<span id="otp"></span>
+            <button type="submit" onclick="closepopup()">OK</button>
+        </div>
+       
+      </section>
+    
+</body>
+<script src="Ecommerce.js"></script>
+
+<script>
+    if (document.readyState == 'loading') {
+    document.addEventListener('DOMContentLoaded', ready)
+} else {
+    ready()
+}
+
+function ready() {
+    var removeCartItemButtons = document.getElementsByClassName('btn-danger')
+    for (var i = 0; i < removeCartItemButtons.length; i++) {
+        var button = removeCartItemButtons[i]
+        button.addEventListener('click', removeCartItem)
+    }
+
+    var quantityInputs = document.getElementsByClassName('cart-quantity-input')
+    for (var i = 0; i < quantityInputs.length; i++) {
+        var input = quantityInputs[i]
+        input.addEventListener('change', quantityChanged)
+    }
+
+    var addToCartButtons = document.getElementsByClassName('Btn')
+    for (var i = 0; i < addToCartButtons.length; i++) {
+        var button = addToCartButtons[i]
+        button.addEventListener('click', addToCartClicked)
+    }
+
+    document.getElementsByClassName('btn-purchase')[0].addEventListener('click', purchaseClicked)
+}
+
+function purchaseClicked() {
+    alert('Thank you for your purchase')
+
+    var cartItems = document.getElementsByClassName('cart-items')[0]
+    while (cartItems.hasChildNodes()) {
+        cartItems.removeChild(cartItems.firstChild)
+    }
+    updateCartTotal()
+}
+
+function removeCartItem(event) {
+    var buttonClicked = event.target
+    buttonClicked.parentElement.parentElement.remove()
+    updateCartTotal()
+}
+
+function quantityChanged(event) {
+    var input = event.target
+    if (isNaN(input.value) || input.value <= 0) {
+        input.value = 1
+    }
+    updateCartTotal()
+}
+
+function addToCartClicked(event) {
+    var button = event.target
+    var shopItem = button.parentElement.parentElement
+    var title = shopItem.getElementsByClassName('shop-item-title')[0].innerText
+    var price = shopItem.getElementsByClassName('shop-item-price')[0].innerText
+    var imageSrc = shopItem.getElementsByClassName('shop-item-image')[0].src
+    addItemToCart(title, price, imageSrc)
+    updateCartTotal()
+}
+
+function addItemToCart(title, price, imageSrc) {
+    var cartRow = document.createElement('div')
+    cartRow.classList.add('cart-row')
+    var cartItems = document.getElementsByClassName('cart-items')[0]
+    var cartItemNames = cartItems.getElementsByClassName('cart-item-title')
+    for (var i = 0; i < cartItemNames.length; i++) {
+        if (cartItemNames[i].innerText == title) {
+            alert('This item is already added to the cart')
+            return
+        }
+    }
+    var cartRowContents = `
+        <div class="cart-item cart-column">
+            <img class="cart-item-image" src="${imageSrc}" width="100" height="100">
+            <span class="cart-item-title">${title}</span>
+        </div>
+        <span class="cart-price cart-column">${price}</span>
+        <div class="cart-quantity cart-column">
+            <input class="cart-quantity-input" type="number" value="1">
+            <button class="btn btn-danger" type="button">Delete</button>
+        </div>`
+    cartRow.innerHTML = cartRowContents
+    cartItems.append(cartRow)
+    cartRow.getElementsByClassName('btn-danger')[0].addEventListener('click', removeCartItem)
+    cartRow.getElementsByClassName('cart-quantity-input')[0].addEventListener('change', quantityChanged)
+}
+
+function updateCartTotal() {
+    var cartItemContainer = document.getElementsByClassName('cart-items')[0]
+    var cartRows = cartItemContainer.getElementsByClassName('cart-row')
+    var total = 0
+    for (var i = 0; i < cartRows.length; i++) {
+        var cartRow = cartRows[i]
+        var priceElement = cartRow.getElementsByClassName('cart-price')[0]
+        var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0]
+        var price = parseFloat(priceElement.innerText.replace('Rs', ''))
+        var quantity = quantityElement.value
+        total = total + (price * quantity)
+    }
+    total = Math.round(total * 100) / 100
+    document.getElementsByClassName('cart-total-price')[0].innerText =  'Rs' + total
+}
+</script>
+
+
+</html>
